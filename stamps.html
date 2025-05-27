@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Коллекция марок Пуффендуя</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cormorant Unicase', serif;
+      background-color: #F6F2E6;
+      color: #4D3B2F;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 2rem;
+      text-align: center;
+      background-color: #E8D9B6;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header h1, header p {
+      text-align: right;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin: 0.5rem 0 0;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      font-size: 1.2rem;
+    }
+
+    main {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      z-index: 1;
+      flex: 1;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-shrink: 0;
+    }
+
+    .stamp {
+      height: auto;
+      width: auto;
+      max-height: 200px;
+      transform: rotate(var(--angle)) scale(var(--scale));
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      image-rendering: auto;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    }
+
+    .stamp:hover {
+      transform: scale(calc(var(--scale) * 1.05)) rotate(var(--angle));
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      flex-direction: column;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      filter: none;
+      background: none;
+      box-shadow: none;
+      border: none;
+    }
+
+    .caption {
+      color: #F6F2E6;
+      font-size: 1.2rem;
+      text-align: center;
+      background-color: transparent;
+      padding: 0.5rem 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #E8D9B6;
+      color: #4D3B2F;
+      font-family: 'Cormorant Unicase', serif;
+    }
+
+    @media (max-width: 1024px) {
+      .stamp {
+        max-height: 160px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stamp {
+        max-height: 120px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stamp {
+        max-height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Коллекция почтовых марок</h1>
+    <p>День Пуффендуя 2025</p>
+  </header>
+
+  <main>
+    <div class="gallery" id="main-gallery"></div>
+  </main>
+
+  <footer>
+    С любовью от Когтеврана
+  </footer>
+
+  <div class="modal" id="modal">
+    <img id="modal-img" src="" alt="Stamp enlarged">
+    <div class="caption" id="modal-caption"></div>
+  </div>
+
+  <script>
+    const images = [
+      { src: "https://s1.radikal.cloud/2025/05/27/25_MAGDALENAEDINBURGd3ee275945966cf0.png", caption: "Магдалена, 5 курс" },
+      { src: "https://s1.radikal.cloud/2025/05/27/02_DZAREDKRIN6c3898a25459c100.png", caption: "Джаред, 6 курс" },
+      { src: "https://s1.radikal.cloud/2025/05/27/01_ENNIMURf768e6ed3324bd83.png", caption: "Энни, 1 курс" },
+      { src: "https://s1.radikal.cloud/2025/05/27/17_MIRANDAKEMBELLf927b822d8ef295d.png", caption: "Миранда, библиотекарь" },
+      { src: "https://s1.radikal.cloud/2025/05/27/32_PUFFENDUISKIEPLYSKA79f67cab6939f541.png", caption: "Пуффендуйские пляски" }
+    ];
+
+    const rowPattern = [6, 5, 6, 5, 6, 5, 4];
+    const mainGallery = document.getElementById('main-gallery');
+
+    function renderGallery() {
+      mainGallery.innerHTML = '';
+      let imageIndex = 0;
+
+      for (let i = 0; i < rowPattern.length; i++) {
+        const row = document.createElement('div');
+        row.className = 'row';
+
+        for (let j = 0; j < rowPattern[i]; j++) {
+          const imgData = images[imageIndex % images.length];
+          const angle = (Math.random() * 6 - 3).toFixed(2) + 'deg';
+          const scale = (Math.random() * 0.4 + 0.8).toFixed(2);
+
+          const img = document.createElement('img');
+          img.className = 'stamp';
+          img.src = imgData.src;
+          img.setAttribute('style', `--angle: ${angle}; --scale: ${scale};`);
+          img.setAttribute('data-caption', imgData.caption);
+
+          row.appendChild(img);
+          imageIndex++;
+        }
+        mainGallery.appendChild(row);
+      }
+    }
+
+    renderGallery();
+    window.addEventListener('resize', renderGallery);
+
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalCaption = document.getElementById('modal-caption');
+
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('stamp')) {
+        modal.style.display = 'flex';
+        modalImg.src = e.target.src;
+        modalCaption.textContent = e.target.getAttribute('data-caption') || '';
+      } else if (e.target === modal) {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        modalCaption.textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>
