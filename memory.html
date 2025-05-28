@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>День Пуффендуя 2025</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Cormorant Unicase', serif;
+      background-color: #F6F2E6;
+      color: #4D3B2F;
+    }
+
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 2rem;
+      text-align: center;
+      background-color: #E8D9B6;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header h1, header p {
+      text-align: right;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin: 0.5rem 0 0;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .intro-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 2rem;
+      text-align: left;
+    }
+
+    .collage {
+      position: relative;
+      width: 300px;
+      height: 340px;
+    }
+
+    .collage img {
+      position: absolute;
+      object-fit: cover;
+      border: none;
+      background-color: transparent;
+      border-radius: 4px;
+    }
+
+    .collage img:nth-child(1) {
+      top: 0;
+      left: 30px;
+      width: 150px;
+      z-index: 1;
+    }
+
+    .collage img:nth-child(2) {
+      top: 40px;
+      left: 130px;
+      width: 115px;
+      z-index: 2;
+    }
+
+    .collage img:nth-child(3) {
+      top: 80px;
+      left: 0px;
+      width: 110px;
+      z-index: 3;
+    }
+
+    .collage img:nth-child(4) {
+      top: 140px;
+      left: 110px;
+      width: 95px;
+      z-index: 4;
+    }
+
+    .collage img:nth-child(5) {
+      top: 190px;
+      left: 40px;
+      width: 95px;
+      height: 135px;
+      z-index: 5;
+    }
+
+    .message {
+      max-width: 400px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .open-button {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 3rem;
+    }
+
+    .open-button a {
+      background-color: #D2B48C;
+      color: #fff;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    .open-button a:hover {
+      background-color: #b4956c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #E8D9B6;
+      color: #4D3B2F;
+    }
+
+    @media (max-width: 768px) {
+      .intro-section {
+        flex-direction: column;
+      }
+
+      .collage {
+        width: 100%;
+        height: auto;
+      }
+
+      .collage img {
+        position: static;
+        margin-bottom: 1rem;
+      }
+    }
+
+    /* Игра */
+    #game {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 80px);
+      grid-gap: 10px;
+      justify-content: center;
+    }
+
+    .card {
+      width: 80px;
+      height: 80px;
+      background-color: #D2B48C;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card .front, .card .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+    }
+
+    .card .front {
+      background-color: #D2B48C;
+    }
+
+    .card .back {
+      background-size: cover;
+      background-position: center;
+      transform: rotateY(180deg);
+    }
+
+    #timer {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>Слово тёплое — как марка на письме</h1>
+      <p>В мире, полном суеты, так важно делиться добрым словом. Почта и марки хранят в себе тепло, которое можно передать даже на расстоянии.</p>
+    </header>
+
+    <section class="intro-section">
+      <div class="collage">
+        <img src="https://s1.radikal.cloud/2025/05/27/25_MAGDALENAEDINBURGd3ee275945966cf0.png" alt="Магдалена">
+        <img src="https://s1.radikal.cloud/2025/05/27/02_DZAREDKRIN6c3898a25459c100.png" alt="Джаред">
+        <img src="https://s1.radikal.cloud/2025/05/27/01_ENNIMURf768e6ed3324bd83.png" alt="Энни">
+        <img src="https://s1.radikal.cloud/2025/05/27/17_MIRANDAKEMBELLf927b822d8ef295d.png" alt="Миранда">
+        <img src="https://s1.radikal.cloud/2025/05/27/32_PUFFENDUISKIEPLYSKA79f67cab6939f541.png" alt="Плюшка">
+      </div>
+
+      <div class="message">
+        <p><b>Дорогие пуффендуйцы!</b></p>
+        <p>В этот день ваш факультет сияет особенно ярко. От имени Когтеврана поздравляем вас с Днём Факультета! Мы восхищаемся вашей добротой, трудолюбием и сплочённостью.</p>
+        <p>В знак нашей дружбы мы подготовили для вас коллекцию марок — с вашими лицами, историями и символами. Пусть они принесут улыбку и вдохновение.</p>
+      </div>
+    </section>
+
+    <div class="open-button">
+      <a href="#game">Открыть коллекцию</a>
+    </div>
+
+    <div id="game">
+      <div id="timer">Время: 0 сек</div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <footer>
+    © Подарок ко Дню Пуффендуя 2025. С любовью от Когтеврана
+  </footer>
+
+  <script>
+    const images = [
+      { src: "img/01_ЭнниМур.png", caption: "Декан факультета Энни Мур, выпускник(весна 2024)" },
+      { src: "img/02_ДжаредКрин.png", caption: "Профессор Джаред Крин, выпускник(весна 2011)" },
+      { src: "img/03_АлисаИндиго.png", caption: "Профессор Алиса Индиго, выпускник(зима 2024-2025)" },
+      { src: "img/04_СерафинаЛейн.png", caption: "Профессор Серафина Лейн" },
+      { src: "img/05_ЛиваУнсет.png", caption: "Профессор Лива Унсет, выпускник(Зима 2022-2023)" },
+      { src: "img/06_АльборекМортимер.png", caption: "Профессор Альборек Мортимер, выпускник(весна 2022)" },
+      { src: "img/07_ГрэйсГрейлэнд.png", caption: "Староста факультета ГрэйсГрейлэнд, 4 курс" },
+      { src: "img/08_EvylinMcFie.png", caption: "Староста факультета Evylin McFie, 5 курс" },
+      { src: "img/09_WilliamJefferson.png", caption: "William Jefferson, 5 курс" },
+      { src: "img/10_АннаАнил.png", caption: "Анна Анил, 6 курс" },
+      { src: "img/11_ТуральфЭустад.png", caption: "Туральф Эустадг, 5 курс" },
+      { src: "img/12_ЭмильРозье.png", caption: "Эмиль Розье, 4 курс" },
+      { src: "img/13_ХьюСмелс.png", caption: "Хью Смелс, 4 курс" },
+      { src: "img/14_NanielEsper.png", caption: "Naniel Esper, 4 курс" },
+      { src: "img/15_АудунДеллингхейм.png", caption: "Аудун Деллингхейм, 4 курс" },
+      { src: "img/16_КеллиПейтон.png", caption: "Келли Пейтон, 3 курс" },
+      { src: "img/17_МирандаКэмбелл.png", caption: "Миранда Кэмбелл, 3 курс" },
+      { src: "img/18_ТомасРоуз.png", caption: "Томас Роуз, 2 курс" },
+      { src: "img/19_ХирсинВандерер.png", caption: "Хирсин Вандерер, 2 курс" },
+      { src: "img/20_LeonardMcFee.png", caption: "Leonard McFee, 2 курс" },
+      { src: "img/21_МарселинВудхарт.png", caption: "Марселин Вудхарт, 2 курс" },
+      { src: "img/22_ИкимираСаерс.png", caption: "Икимира Саерс, 1 курс" },
+      { src: "img/23_ValleByun.png", caption: "Valle Byun, 1 курс" },
+      { src: "img/24_ЭвелинОдри.png", caption: "Эвелин Одри, 1 курс" },
+      { src: "img/25_МагдаленаЭдинбург.png", caption: "Магдалена Эдинбург, 1 курс" },
+      { src: "img/26_ДаниэльХарт.png", caption: "Даниэль Харт, 1 курс" },
+      { src: "img/27_КромбергКиль.png", caption: "Кромберг Киль, 1 курс" },
+      { src: "img/28_ЧарлиГрэй.png", caption: "Чарли Грэй, 1 курс" },
+      { src: "img/29_AnneErekson.png", caption: "Anne Erekson, 1 курс" },
+      { src: "img/30_ТолстыйМонах.png", caption: "Толстый Монах, призрак факультета" },
+      { src: "img/31_ГражданинПифагорян.png", caption: "Гражданин Пифагорян, призрак факультета" },
+      { src: "img/32_ПуффендуйскиеПлюшка.png", caption: "Пуффендуйские плюшки, традиционное лакомство" },
+      { src: "img/33_ГномыХаффлеПаффле.png", caption: "Гномы Хаффле и Паффле" },
+      { src: "img/34_БарсукХаффи.png", caption: "Барсук Хаффи" },
+      { src: "img/35_КактусоваяДевочка.png", caption: "Кактусовая Девочка" },
+      { src: "img/36_ЧашаПенелопы.png", caption: "Чаша Пенелопы Пуффендуй, реликвия факультета" },
+      { src: "img/37_СборнаяКарамель.png", caption: "Сборная команда по квиддичу Карамель Эдинбург" },
+
+    ];
+
+    const grid = document.getElementById('grid');
+    const timerEl = document.getElementById('timer');
+    let cards = [];
+    let firstCard = null;
+    let secondCard = null;
+    let matches = 0;
+    let startTime = null;
+    let timerInterval = null;
+
+    function shuffle(array) {
+      return array.concat(array).sort(() => Math.random() - 0.5);
+    }
+
+    function startTimer() {
+      startTime = Date.now();
+      timerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        timerEl.textContent = `Время: ${elapsed} сек`;
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+    }
+
+    function flip(card) {
+      if (card.classList.contains('flipped') || secondCard) return;
+      card.classList.add('flipped');
+
+      if (!firstCard) {
+        firstCard = card;
+        if (!startTime) startTimer();
+      } else {
+        secondCard = card;
+        if (firstCard.dataset.image === secondCard.dataset.image) {
+          matches++;
+          firstCard = null;
+          secondCard = null;
+          if (matches === images.length) stopTimer();
+        } else {
+          setTimeout(() => {
+            firstCard.classList.remove('flipped');
+            secondCard.classList.remove('flipped');
+            firstCard = null;
+            secondCard = null;
+          }, 1000);
+        }
+      }
+    }
+
+    function createBoard() {
+      const shuffled = shuffle(images);
+      shuffled.forEach(src => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.image = src;
+
+        const front = document.createElement('div');
+        front.classList.add('front');
+
+        const back = document.createElement('div');
+        back.classList.add('back');
+        back.style.backgroundImage = `url('${src}')`;
+
+        card.append(front, back);
+        card.addEventListener('click', () => flip(card));
+
+        grid.appendChild(card);
+      });
+    }
+
+    createBoard();
+  </script>
+</body>
+</html>
