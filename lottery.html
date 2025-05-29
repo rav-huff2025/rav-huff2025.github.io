@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Почтовая лотерея</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cormorant Unicase', serif;
+      background-color: #F6F2E6;
+      color: #4D3B2F;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 2rem;
+      text-align: center;
+      background-color: #E8D9B6;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header h1, header p {
+      text-align: right;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin: 0.5rem 0 0;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      font-size: 1.2rem;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 3rem;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+    
+    .cards-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
+    
+    .card {
+      position: relative;
+      width: 100px;
+      height: 140px;
+      background-color: #a37c3a;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(63,47,31,0.3);
+      cursor: pointer;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+    
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: #a37c3a;
+      transition: opacity 0.4s ease;
+    }
+    
+    .card.revealed .overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    button {
+      background-color: #D2B48C;
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Cormorant Unicase', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+      margin-top: 0.5rem;
+    }
+    
+    button:hover {
+      background-color: #b4956c;
+    }
+    
+    #message {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      min-height: 2em;
+      font-weight: 600;
+      text-align: center;
+      width: 100%;
+    }
+    
+    nav a {
+      color: #3f2f1f;
+      text-decoration: none;
+      font-weight: 500;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    
+    nav a:hover {
+      text-decoration: underline;
+      background-color: rgba(122, 96, 60, 0.1);
+    }
+
+.rules {
+  background-color: rgba(210, 180, 140, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rules h3 {
+  margin-top: 0;
+  text-align: center;
+  font-family: 'Cormorant Unicase', serif;
+}
+
+.rules ol, .rules ul {
+  margin: 0.5rem 0;
+}
+
+.rules li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .rules {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}
+
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #E8D9B6;
+      color: #4D3B2F;
+      font-family: 'Cormorant Unicase', serif;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        width: 80px;
+        height: 112px;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      #message {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        width: 70px;
+        height: 98px;
+      }
+      
+      header {
+        padding: 1.5rem 1rem;
+      }
+      
+      header h1 {
+        font-size: 1.7rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+      }
+      
+      #message {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pufftery Game</h1>
+    <p>Почтовая, почти безвыиграшная лотерея. Рискни! Поймай удачу за хвост!</p>
+  </header>
+
+  <main>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="stamps.html">Коллекция марок</a>
+	  <a href="lololo.html">Huffmory Game</a>
+    </nav>
+
+    <div class="cards-row" id="cardsRow"></div>
+    <button id="resetBtn">Начать заново</button>
+    <div id="message"></div>
+	
+	  <div class="rules">
+    <h3>Правила лотереи Pufftery Game:</h3>
+    <ol>
+      <li>Перед вами 6 закрытых марок - откройте их все</li>
+      <li>Если найдёте 3 одинаковые марки - вы выиграли!</li>
+      <li>Особые призы за:
+        <ul>
+          <li>собранный сет из 3-х марок с выпускниками факультета Пуффендуй</li>
+          <li>собранный сет из 3-х марок с "Пуффендуйскими плюшками"</li>
+          <li>собранный сет из 3-х марок из категории "Символы факультета"</li>
+        </ul>
+      </li>
+      <li>Нажмите "Начать заново" для новой попытки</li>
+    </ol>
+  </div>
+	
+  </main>
+
+  <script>
+    // Исправленный массив с марками
+    const stamps = [
+      "https://s1.radikal.cloud/2025/05/29/02_DZAREDKRINf4ecab63356ede07.png",
+      "https://s1.radikal.cloud/2025/05/29/03_ALISAINDIGOd7e134e68279602e.png",
+      "https://s1.radikal.cloud/2025/05/29/04_SERAFINALEINc8b3f6e4bf3956a8.png",
+      "https://s1.radikal.cloud/2025/05/29/05_LIVAUNSET3e1956b0ba87ade5.png",
+      "https://s1.radikal.cloud/2025/05/29/06_ALBOREKMORTIMERabbbd48c002d817c.png",
+      "https://s1.radikal.cloud/2025/05/29/07_GREISGREILEND34d7b83b10db30e7.png",
+      "https://s1.radikal.cloud/2025/05/29/09_WilliamJeffersonb5646c1b03201e01.png",
+      "https://s1.radikal.cloud/2025/05/29/10_ANNAANIL1489c0f4c5485c7e.png",
+      "https://s1.radikal.cloud/2025/05/29/11_TURALFEUSTAD875a385d888825bf.png",
+      "https://s1.radikal.cloud/2025/05/29/12_EMILROZE31f19b71f502bece.png",
+      "https://s1.radikal.cloud/2025/05/29/13_KYSMELSb4bd85c67e44661c.png",
+      "https://s1.radikal.cloud/2025/05/29/14_NanielEsper58b6987747c37e1b.png",
+      "https://s1.radikal.cloud/2025/05/29/16_KELLIPEITON8aa01c8b739ab8a5.png",
+      "https://s1.radikal.cloud/2025/05/29/17_MIRANDAKEMBELL213250fed7a37d3a.png",
+      "https://s1.radikal.cloud/2025/05/29/18_TOMASROUZa8add7df3beabe8d.png",
+      "https://s1.radikal.cloud/2025/05/29/19_KIRSINVANDERER0516a50a207c56c0.png",
+      "https://s1.radikal.cloud/2025/05/29/20_LeonardMcFeede80b849de1fdb00.png",
+      "https://s1.radikal.cloud/2025/05/29/21_MARSELINVUDKART4ce4e0ad9fe471af.png",
+      "https://s1.radikal.cloud/2025/05/29/23_ValleByunb2731f7b798ae3e6.png",
+      "https://s1.radikal.cloud/2025/05/29/24_EVELINODRI68a16d5ce771c91c.png",
+      "https://s1.radikal.cloud/2025/05/29/25_MAGDALENAEDINBURG9b296dd12ce3799b.png",
+      "https://s1.radikal.cloud/2025/05/29/26_DANIELKARTee33a6a5409576f3.png",
+      "https://s1.radikal.cloud/2025/05/29/27_KROMBERGKILfaeac83f689f23c7.png",
+      "https://s1.radikal.cloud/2025/05/29/28_CARLIGREI71801f6a87fcdee8.png",
+      "https://s1.radikal.cloud/2025/05/29/30_TOLSTYIMONAK640a956585669a94.png",
+      "https://s1.radikal.cloud/2025/05/29/31_GRAZDANINPIFAGORYNb1425578fbf3793a.png",
+      "https://s1.radikal.cloud/2025/05/29/32_PUFFENDUISKIEPLYSKA1c6836c9db127b49.png",
+      "https://s1.radikal.cloud/2025/05/29/33_GNOMYKAFFLEPAFFLE6c55ba431272e639.png",
+      "https://s1.radikal.cloud/2025/05/29/34_BARSUKKAFFI2e7da73b21cf85bf.png",
+      "https://s1.radikal.cloud/2025/05/29/35_KAKTUSOVAYDEVOCKA8023e3c92d0d6abe.png",
+      "https://s1.radikal.cloud/2025/05/29/36_CASAPENELOPYc36c64857d409b35.png",
+      "https://s1.radikal.cloud/2025/05/29/37_SBORNAYKARAMEL03eb773b6c2f6cb7.png",
+      "https://s1.radikal.cloud/2025/05/29/01_ENNIMURfe4d0f1a6fda83dd.png",
+      "https://s1.radikal.cloud/2025/05/29/08_EvylinMcFie10f595e6c8747782.png",
+      "https://s1.radikal.cloud/2025/05/29/15_AUDUNDELLINGKEIM135d89f8ee4b7b3e.png",
+      "https://s1.radikal.cloud/2025/05/29/22_IKIMIRASAERS840e35368eb9b454.png",
+      "https://s1.radikal.cloud/2025/05/29/29_AnneErekson0c65743f78281ce3.png",
+      "https://s1.radikal.cloud/2025/05/29/36_CASAPENELOPY840a69b604dae6f5.png",
+    ];
+
+    // Константы для особых категорий
+    const выпускники = [
+      "https://s1.radikal.cloud/2025/05/29/02_DZAREDKRINf4ecab63356ede07.png",
+      "https://s1.radikal.cloud/2025/05/29/03_ALISAINDIGOd7e134e68279602e.png",
+      "https://s1.radikal.cloud/2025/05/29/04_SERAFINALEINc8b3f6e4bf3956a8.png",
+      "https://s1.radikal.cloud/2025/05/29/05_LIVAUNSET3e1956b0ba87ade5.png",
+      "https://s1.radikal.cloud/2025/05/29/06_ALBOREKMORTIMERabbbd48c002d817c.png"
+    ];
+
+    const кухня = "https://s1.radikal.cloud/2025/05/29/32_PUFFENDUISKIEPLYSKA1c6836c9db127b49.png";
+
+    const традиции = [
+      "https://s1.radikal.cloud/2025/05/29/30_TOLSTYIMONAK640a956585669a94.png",
+      "https://s1.radikal.cloud/2025/05/29/31_GRAZDANINPIFAGORYNb1425578fbf3793a.png",
+      "https://s1.radikal.cloud/2025/05/29/32_PUFFENDUISKIEPLYSKA1c6836c9db127b49.png",
+      "https://s1.radikal.cloud/2025/05/29/33_GNOMYKAFFLEPAFFLE6c55ba431272e639.png",
+      "https://s1.radikal.cloud/2025/05/29/34_BARSUKKAFFI2e7da73b21cf85bf.png",
+      "https://s1.radikal.cloud/2025/05/29/35_KAKTUSOVAYDEVOCKA8023e3c92d0d6abe.png",
+      "https://s1.radikal.cloud/2025/05/29/36_CASAPENELOPYc36c64857d409b35.png",
+      "https://s1.radikal.cloud/2025/05/29/37_SBORNAYKARAMEL03eb773b6c2f6cb7.png"
+    ];
+
+    const cardsRow = document.getElementById('cardsRow');
+    const resetBtn = document.getElementById('resetBtn');
+    const message = document.getElementById('message');
+
+    let chosenCards = [];
+    let revealedCount = 0;
+
+    // Функция: выбираем count карт со случайными повторениями
+    function getRandomCardsWithRepeats(count) {
+      const result = [];
+      for (let i = 0; i < count; i++) {
+        const randomIndex = Math.floor(Math.random() * stamps.length);
+        result.push(stamps[randomIndex]);
+      }
+      return result;
+    }
+
+    // Инициализация игры
+    function initGame() {
+      chosenCards = getRandomCardsWithRepeats(6);
+      revealedCount = 0;
+      message.textContent = '';
+      cardsRow.innerHTML = '';
+
+      chosenCards.forEach((url, i) => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.index = i;
+
+        // Картинка марки
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = 'Марка';
+        card.appendChild(img);
+
+        // Накрывающий слой — покрытие
+        const overlay = document.createElement('div');
+        overlay.classList.add('overlay');
+        card.appendChild(overlay);
+
+        // Клик — открыть карту (стереть покрытие)
+        card.addEventListener('click', () => {
+          if (card.classList.contains('revealed')) return; // Уже открыт
+          card.classList.add('revealed');
+          revealedCount++;
+
+          if (revealedCount === chosenCards.length) {
+            checkForDuplicates();
+          }
+        });
+
+        cardsRow.appendChild(card);
+      });
+    }
+
+    // Проверяем, есть ли 2,3 и более одинаковых карт
+    function checkForDuplicates() {
+      // Проверка на выпускников (3+ уникальных марки из списка)
+      const uniqueGraduates = new Set();
+      chosenCards.forEach(card => {
+        if (выпускники.includes(card)) {
+          uniqueGraduates.add(card);
+        }
+      });
+      
+      if (uniqueGraduates.size >= 3) {
+        message.textContent = "Вы собрали сет выпускников и получаете особую награду!";
+        return;
+      }
+
+      // Проверка на кухню (3+ одинаковых марки кухни)
+      const kitchenCount = chosenCards.filter(card => card === кухня).length;
+      if (kitchenCount >= 3) {
+        message.textContent = "Вы настоящий ценитель пуффендуйской кухни и получаете особую награду!";
+        return;
+      }
+
+      // Проверка на традиции (3+ одинаковых марки из списка традиций)
+      const traditionsCounts = {};
+      chosenCards.forEach(card => {
+        if (традиции.includes(card)) {
+          traditionsCounts[card] = (traditionsCounts[card] || 0) + 1;
+        }
+      });
+      
+      const maxTraditions = Math.max(...Object.values(traditionsCounts));
+      if (maxTraditions >= 3) {
+        message.textContent = "Вы настоящий ценитель пуффендуйских традиций и получаете особую награду!";
+        return;
+      }
+
+      // Стандартная проверка дубликатов
+      const counts = {};
+      chosenCards.forEach(card => {
+        counts[card] = (counts[card] || 0) + 1;
+      });
+      
+      const maxCount = Math.max(...Object.values(counts));
+      
+      if (maxCount >= 3) {
+        message.textContent = 'Вы поймали удачу за хвост! Поздравляем с выигрышем!';
+      } else if (maxCount >= 2) {
+        message.textContent = 'Почти получилось! Победа была совсем близка!';
+      } else {
+        message.textContent = 'Повторов не оказалось. Попробуйте ещё раз!';
+      }
+    }
+
+    resetBtn.addEventListener('click', initGame);
+
+    // Запускаем игру при загрузке
+    initGame();
+  </script>
+
+  <footer>
+    © Подарок ко Дню Пуффендуя 2025. С любовью от Когтеврана
+  </footer>
+</body>
+</html>
