@@ -53,6 +53,15 @@
       font-size: 1.2rem;
     }
 
+	nav {
+	  display: flex;
+	  justify-content: center;
+	  gap: 1rem;
+	  margin: 1.5rem 0 1rem; 
+	  width: 100%;
+	  
+	}
+    
     main {
       margin-top: 2rem;
       padding-top: 1rem;
@@ -125,6 +134,21 @@
       padding: 0.5rem 1rem;
     }
 
+    	    nav a {
+      color: #3f2f1f;
+      text-decoration: none;
+      font-weight: 500;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    
+    nav a:hover {
+      text-decoration: underline;
+      background-color: rgba(122, 96, 60, 0.1);
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -144,6 +168,11 @@
       .stamp {
         max-height: 120px;
       }
+      	        nav {
+        flex-wrap: wrap;
+		margin-top: 1rem;
+		padding-top: 1rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -160,6 +189,10 @@
   </header>
 
   <main>
+    <nav>
+      <a href="lottery.html">Почтовая лотерея</a>
+      <a href="memory.html">Huffmory game</a>
+    </nav>
     <div class="gallery" id="main-gallery"></div>
   </main>
 
