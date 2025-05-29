@@ -189,7 +189,6 @@
   }
 }
 
-
 .award {
   background-color: rgba(210, 180, 140, 0.2);
   border-radius: 8px;
@@ -221,6 +220,51 @@
     padding: 0.8rem;
   }
 }
+
+.stamps-collage {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 800px;
+  flex-wrap: wrap;
+}
+
+.stamps-collage img {
+  width: 180px;
+  height: 252px; /* Сохраняем пропорции 5:7 */
+  object-fit: cover;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+}
+
+.stamps-collage img:hover {
+  transform: translateY(-10px) scale(1.05);
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .stamps-collage {
+    gap: 15px;
+  }
+  
+  .stamps-collage img {
+    width: 150px;
+    height: 210px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stamps-collage {
+    gap: 10px;
+  }
+  
+  .stamps-collage img {
+    width: 130px;
+    height: 182px;
+  }
+}
+
 
     footer {
       text-align: center;
@@ -284,34 +328,55 @@
     <nav>
       <a href="index.html">Главная</a>
       <a href="stamps.html">Коллекция марок</a>
-	  <a href="lololo.html">Huffmory Game</a>
     </nav>
 
     <div class="cards-row" id="cardsRow"></div>
     <button id="resetBtn">Начать заново</button>
     <div id="message"></div>
 	
-	  <div class="rules">
-    <h3>Правила лотереи Pufftery Game:</h3>
-    <ol>
-      <li>Перед вами 6 закрытых марок - откройте их все</li>
-      <li>Если найдёте 3 одинаковые марки - вы выиграли!</li>
-      <li>Особые призы за:
-        <ul>
-          <li>собранный сет из 3-х марок с выпускниками факультета Пуффендуй</li>
-          <li>собранный сет из 3-х марок с "Пуффендуйскими плюшками"</li>
-          <li>собранный сет из 3-х марок из категории "Символы факультета"</li>
-        </ul>
-      </li>
-      <li>Нажмите "Начать заново" для новой попытки</li>
-    </ol>
-  </div>
-	  
+	<div class="rules">
+  <h3>Правила лотереи Pufftery Game:</h3>
+  <ol>
+    <li>Участвовать могут абсолютно все. Количество попыток ограничено лишь вашей степенью терпения</li>
+    <li>Перед вами 6 закрытых марок - откройте их все</li>
+    <li>Основные условия выигрыша:
+      <ul>
+        <li>3+ <strong>одинаковые</strong> любые марки - обычный выигрыш</li>
+        <li>3+ <strong>любые</strong> марки с выпускниками факультета Пуффендуй - особый приз</li>
+        <li>3+ <strong>одинаковые</strong> марки "Пуффендуйские плюшки" - особый приз</li>
+        <li>3+ <strong>любые</strong> марки из категории "Символы факультета" - особый приз</li>
+      </ul>
+    </li>
+    <li>Невероятная удача:
+      <ul>
+        <li>Собраны два или более сета одновременно</li>
+      </ul>
+    </li>
+    <li>Нажмите "Начать заново" для новой попытки</li>
+  </ol>
+</div>
+
 <div class="award">
-	<h3>О наградах:</h3>
-Тут мы рассказывает о наградах, как только их согласуем  
-  </div>	
-	  
+  <h3>О наградах:</h3>
+  <ol> Итак, вы победили в лотерее <strong>Pufftery Game</strong>, что дальше?
+  <br><br>
+    <li>Сделайте скриншот, на котором будет четко виден ваш результат</li>
+    <li>Скорее опубликуйте его в теме с подарком или просто пришлите Блейк Эллингтон любым удобным вам способом
+	<li>Ждите заслуженную награду, ведь вы не только азартны, но и прекрасны
+	  <br><br>
+	 P.S. Несмотря на все приложенные усилия, есть вероятность, что коварные беклы(да, именно они) все-таки помешают вам получить приз. 
+	 Поэтому, если вам кажется, что ваш лотерейный билет был выигрышным, однако вы не увидели сообщения с поздравление, смело пишите нам!
+Мы не вернем вам деньги, ведь лотерея бесплатная, но поможем получить заслуженный приз.	
+  </ol> 
+   
+  <div class="stamps-collage">
+    <img src="https://s1.radikal.cloud/2025/05/30/38_lottery4bce68ac0c298ef5.png" alt="Знаток истории" style="margin-top: -10px;">
+    <img src="https://s1.radikal.cloud/2025/05/30/39_lotterydadf97fa805676fe.png" alt="Сладкая булочка" style="margin-top: 15px;">
+    <img src="https://s1.radikal.cloud/2025/05/30/40_lottery8cf969446360a199.png" alt="Ценитель традиций" style="margin-top: -5px;">
+    <img src="https://s1.radikal.cloud/2025/05/30/40_lottery8cf969446360a199.png" alt="Что-то про удачу" style="margin-top: 10px;">
+  </div>
+</div>
+	
   </main>
 
   <script>
@@ -358,7 +423,7 @@
 
     // Константы для особых категорий
     const выпускники = [
-      "https://s1.radikal.cloud/2025/05/29/01_ENNIMURfe4d0f1a6fda83dd.png",
+	  "https://s1.radikal.cloud/2025/05/29/01_ENNIMURfe4d0f1a6fda83dd.png",
       "https://s1.radikal.cloud/2025/05/29/02_DZAREDKRINf4ecab63356ede07.png",
       "https://s1.radikal.cloud/2025/05/29/03_ALISAINDIGOd7e134e68279602e.png",
       "https://s1.radikal.cloud/2025/05/29/04_SERAFINALEINc8b3f6e4bf3956a8.png",
@@ -434,58 +499,60 @@
       });
     }
 
-    // Проверяем, есть ли 2,3 и более одинаковых карт
-    function checkForDuplicates() {
-      // Проверка на выпускников (3+ уникальных марки из списка)
-      const uniqueGraduates = new Set();
-      chosenCards.forEach(card => {
-        if (выпускники.includes(card)) {
-          uniqueGraduates.add(card);
-        }
-      });
-      
-      if (uniqueGraduates.size >= 3) {
+function checkForDuplicates() {
+    // Подсчет показателей
+    const graduateCount = chosenCards.filter(card => выпускники.includes(card)).length;
+    const traditionsCount = chosenCards.filter(card => традиции.includes(card)).length;
+    const kitchenCount = chosenCards.filter(card => card === кухня).length;
+    
+    // Подсчет одинаковых карт
+    const counts = {};
+    chosenCards.forEach(card => counts[card] = (counts[card] || 0) + 1);
+    const maxCount = Object.values(counts).length > 0 ? Math.max(...Object.values(counts)) : 0;
+    
+    // Проверка НЕВЕРОЯТНОЙ УДАЧИ
+    const setCount = (graduateCount >= 3 ? 1 : 0) + 
+                    (traditionsCount >= 3 ? 1 : 0) + 
+                    (kitchenCount >= 3 ? 1 : 0);
+    
+    const hasMultipleSets = setCount >= 2;
+    
+    // Проверка на 3+ одинаковые карты только для выпускников и традиций
+    const hasThreeIdenticalSpecial = Object.keys(counts).some(card => {
+        return counts[card] >= 3 && 
+               (выпускники.includes(card) || традиции.includes(card));
+    });
+
+    if (hasMultipleSets || hasThreeIdenticalSpecial) {
+        message.textContent = 'Ваша удача не знает границ! Использование зелья "Феликс Фелицис" при участии в лотерее строго запрещено!';
+        return;
+    }
+
+    // Проверка ОСОБЫХ УСЛОВИЙ
+    if (graduateCount >= 3) {
         message.textContent = "Вы собрали сет выпускников и получаете особую награду!";
         return;
-      }
+    }
 
-      // Проверка на кухню (3+ одинаковых марки кухни)
-      const kitchenCount = chosenCards.filter(card => card === кухня).length;
-      if (kitchenCount >= 3) {
+    if (kitchenCount >= 3) {
         message.textContent = "Вы настоящий ценитель пуффендуйской кухни и получаете особую награду!";
         return;
-      }
+    }
 
-      // Проверка на традиции (3+ одинаковых марки из списка традиций)
-      const traditionsCounts = {};
-      chosenCards.forEach(card => {
-        if (традиции.includes(card)) {
-          traditionsCounts[card] = (traditionsCounts[card] || 0) + 1;
-        }
-      });
-      
-      const maxTraditions = Math.max(...Object.values(traditionsCounts));
-      if (maxTraditions >= 3) {
+    if (traditionsCount >= 3) {
         message.textContent = "Вы настоящий ценитель пуффендуйских традиций и получаете особую награду!";
         return;
-      }
-
-      // Стандартная проверка дубликатов
-      const counts = {};
-      chosenCards.forEach(card => {
-        counts[card] = (counts[card] || 0) + 1;
-      });
-      
-      const maxCount = Math.max(...Object.values(counts));
-      
-      if (maxCount >= 3) {
-        message.textContent = 'Вы поймали удачу за хвост! Поздравляем с выигрышем!';
-      } else if (maxCount >= 2) {
-        message.textContent = 'Почти получилось! Победа была совсем близка!';
-      } else {
-        message.textContent = 'Повторов не оказалось. Попробуйте ещё раз!';
-      }
     }
+
+    // СТАНДАРТНАЯ ПРОВЕРКА
+    if (maxCount >= 3) {
+        message.textContent = 'Вы поймали удачу за хвост! Поздравляем с выигрышем!';
+    } else if (maxCount >= 2) {
+        message.textContent = 'Почти получилось! Победа была совсем близка!';
+    } else {
+        message.textContent = 'Повторов не оказалось. Попробуйте ещё раз!';
+    }
+}
 
     resetBtn.addEventListener('click', initGame);
 
@@ -496,5 +563,7 @@
   <footer>
     © Подарок ко Дню Пуффендуя 2025. С любовью от Когтеврана
   </footer>
+ 
+  
 </body>
 </html>
