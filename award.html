@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pufftery Game</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cormorant Unicase', serif;
+      background-color: #F6F2E6;
+      color: #4D3B2F;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 2rem;
+      text-align: center;
+      background-color: #E8D9B6;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header h1, header p {
+      text-align: right;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin: 0.5rem 0 0;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      font-size: 1.2rem;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 3rem;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+    
+    .cards-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
+    
+    .card {
+      position: relative;
+      width: 100px;
+      height: 140px;
+      background-color: #a37c3a;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(63,47,31,0.3);
+      cursor: pointer;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+    
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: #a37c3a;
+      transition: opacity 0.4s ease;
+    }
+    
+    .card.revealed .overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    button {
+      background-color: #D2B48C;
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Cormorant Unicase', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+      margin-top: 0.5rem;
+    }
+    
+    button:hover {
+      background-color: #b4956c;
+    }
+    
+    #message {
+      font-size: 1.5rem;
+      margin-top: 2rem 0;
+      min-height: 2em;
+      font-weight: 600;
+      text-align: center;
+      width: 100%;
+	  padding: 0.5rem 0; 
+	  
+    }
+    
+    nav a {
+      color: #3f2f1f;
+      text-decoration: none;
+      font-weight: 500;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    
+    nav a:hover {
+      text-decoration: underline;
+      background-color: rgba(122, 96, 60, 0.1);
+    }
+
+.rules {
+  background-color: rgba(210, 180, 140, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rules h3 {
+  margin-top: 0;
+  text-align: center;
+  font-family: 'Cormorant Unicase', serif;
+}
+
+.rules ol, .rules ul {
+  margin: 0.5rem 0;
+}
+
+.rules li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .rules {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}
+
+.award {
+  background-color: rgba(210, 180, 140, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.award h3 {
+  margin-top: 0;
+  text-align: center;
+  font-family: 'Cormorant Unicase', serif;
+}
+
+.award ol, .award ul {
+  margin: 0.5rem 0;
+}
+
+.award li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .award {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}
+
+.stamps-collage {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 800px;
+  flex-wrap: wrap;
+}
+
+.stamps-collage img {
+  width: 180px;
+  height: 252px; /* Сохраняем пропорции 5:7 */
+  object-fit: cover;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+}
+
+.stamps-collage img:hover {
+  transform: translateY(-10px) scale(1.05);
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .stamps-collage {
+    gap: 15px;
+  }
+  
+  .stamps-collage img {
+    width: 150px;
+    height: 210px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stamps-collage {
+    gap: 10px;
+  }
+  
+  .stamps-collage img {
+    width: 130px;
+    height: 182px;
+  }
+}
+
+.game-counter {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 1.2rem;
+  color: #4D3B2F;
+  text-align: center;
+  margin: 15px 0;
+  padding: 8px;
+  background-color: rgba(210, 180, 140, 0.2);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+#gameCount {
+  font-weight: 700;
+  color: #8A5A44;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #E8D9B6;
+      color: #4D3B2F;
+      font-family: 'Cormorant Unicase', serif;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        width: 80px;
+        height: 112px;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      #message {
+        font-size: 1.3rem;
+		margin: 1.8rem 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        width: 70px;
+        height: 98px;
+      }
+      
+      header {
+        padding: 1.5rem 1rem;
+      }
+      
+      header h1 {
+        font-size: 1.7rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+      }
+      
+      #message {
+        font-size: 1.1rem;
+		margin: 1.5rem 0; /* Уменьшенный отступ для мобильных */
+		padding: 0.4rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Победители Pufftery Game</h1>
+  </header>
+
+  <main>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="stamps.html">Коллекция марок</a>
+	  <a href="lottery.html">Pufftery Game</a>
+    </nav>
+	
+
+
+
+	
+  </main>
+
+  <script>
+  
+  
+	
+  </script>
+
+  <footer>
+    © Подарок ко Дню Пуффендуя 2025. С любовью от Когтеврана
+  </footer>
+ 
+  
+</body>
+</html>
