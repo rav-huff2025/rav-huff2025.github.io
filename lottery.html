@@ -363,7 +363,7 @@
     </nav>
     
     <div class="game-counter">
-        Вы испытали удачу <span id="gameCount">0</span> раз
+        Вы бросали вызов фортуне <span id="gameCount">0</span> раз(а)
     </div>
 
     <div class="cards-row" id="cardsRow"></div>
@@ -407,16 +407,16 @@
    
 <div class="stamps-collage">
   <div class="stamp-item" style="--rotation: -3deg; --offset-y: -15px;">
-    <img src="https://s1.radikal.cloud/2025/05/30/38_lottery4bce68ac0c298ef5.png" alt="Знаток истории">
+    <img src="img/38_lottery.png" alt="Знаток истории">
   </div>
   <div class="stamp-item" style="--rotation: 2deg; --offset-y: 10px;">
-    <img src="https://s1.radikal.cloud/2025/05/30/39_lotterydadf97fa805676fe.png" alt="Сладкая булочка">
+    <img src="img/39_lottery.png" alt="Сладкая булочка">
   </div>
   <div class="stamp-item" style="--rotation: -1deg; --offset-y: -20px;">
-    <img src="https://s1.radikal.cloud/2025/05/30/TRADITII7f96da4201f34b84.png" alt="Ценитель традиций">
+    <img src="img/40_lottery.png" alt="Ценитель традиций">
   </div>
   <div class="stamp-item" style="--rotation: 3deg; --offset-y: 5px;">
-    <img src="https://s1.radikal.cloud/2025/05/30/AddText_05-30-03.35.181133f200e78b6ca8.png" alt="Жидкая удача">
+    <img src="img/41_lottery.png" alt="Жидкая удача">
   </div>
 </div>
   
@@ -427,43 +427,43 @@
   <script>
     // Исправленный массив с марками
     const stamps = [
-      "https://s1.radikal.cloud/2025/05/29/02_DZAREDKRINf4ecab63356ede07.png",
-      "https://s1.radikal.cloud/2025/05/29/03_ALISAINDIGOd7e134e68279602e.png",
-      "https://s1.radikal.cloud/2025/05/29/04_SERAFINALEINc8b3f6e4bf3956a8.png",
-      "https://s1.radikal.cloud/2025/05/29/05_LIVAUNSET3e1956b0ba87ade5.png",
-      "https://s1.radikal.cloud/2025/05/29/06_ALBOREKMORTIMERabbbd48c002d817c.png",
-      "https://s1.radikal.cloud/2025/05/29/07_GREISGREILEND34d7b83b10db30e7.png",
-      "https://s1.radikal.cloud/2025/05/29/09_WilliamJeffersonb5646c1b03201e01.png",
-      "https://s1.radikal.cloud/2025/05/29/10_ANNAANIL1489c0f4c5485c7e.png",
-      "https://s1.radikal.cloud/2025/05/29/11_TURALFEUSTAD875a385d888825bf.png",
-      "https://s1.radikal.cloud/2025/05/29/12_EMILROZE31f19b71f502bece.png",
-      "https://s1.radikal.cloud/2025/05/29/13_KYSMELSb4bd85c67e44661c.png",
-      "https://s1.radikal.cloud/2025/05/29/14_NanielEsper58b6987747c37e1b.png",
-      "https://s1.radikal.cloud/2025/05/29/16_KELLIPEITON8aa01c8b739ab8a5.png",
-      "https://s1.radikal.cloud/2025/05/29/17_MIRANDAKEMBELL213250fed7a37d3a.png",
-      "https://s1.radikal.cloud/2025/05/29/18_TOMASROUZa8add7df3beabe8d.png",
-      "https://s1.radikal.cloud/2025/05/29/19_KIRSINVANDERER0516a50a207c56c0.png",
-      "https://s1.radikal.cloud/2025/05/29/20_LeonardMcFeede80b849de1fdb00.png",
-      "https://s1.radikal.cloud/2025/05/29/21_MARSELINVUDKART4ce4e0ad9fe471af.png",
-      "https://s1.radikal.cloud/2025/05/29/23_ValleByunb2731f7b798ae3e6.png",
-      "https://s1.radikal.cloud/2025/05/29/24_EVELINODRI68a16d5ce771c91c.png",
-      "https://s1.radikal.cloud/2025/05/29/25_MAGDALENAEDINBURG9b296dd12ce3799b.png",
-      "https://s1.radikal.cloud/2025/05/29/26_DANIELKARTee33a6a5409576f3.png",
-      "https://s1.radikal.cloud/2025/05/29/27_KROMBERGKILfaeac83f689f23c7.png",
-      "https://s1.radikal.cloud/2025/05/29/28_CARLIGREI71801f6a87fcdee8.png",
-      "https://s1.radikal.cloud/2025/05/29/30_TOLSTYIMONAK640a956585669a94.png",
-      "https://s1.radikal.cloud/2025/05/29/31_GRAZDANINPIFAGORYNb1425578fbf3793a.png",
-      "https://s1.radikal.cloud/2025/05/29/32_PUFFENDUISKIEPLYSKA1c6836c9db127b49.png",
-      "https://s1.radikal.cloud/2025/05/29/33_GNOMYKAFFLEPAFFLE6c55ba431272e639.png",
-      "https://s1.radikal.cloud/2025/05/29/34_BARSUKKAFFI2e7da73b21cf85bf.png",
-      "https://s1.radikal.cloud/2025/05/29/35_KAKTUSOVAYDEVOCKA8023e3c92d0d6abe.png",
-      "https://s1.radikal.cloud/2025/05/29/36_CASAPENELOPYc36c64857d409b35.png",
-      "https://s1.radikal.cloud/2025/05/29/37_SBORNAYKARAMEL03eb773b6c2f6cb7.png",
-      "https://s1.radikal.cloud/2025/05/29/01_ENNIMURfe4d0f1a6fda83dd.png",
-      "https://s1.radikal.cloud/2025/05/29/08_EvylinMcFie10f595e6c8747782.png",
-      "https://s1.radikal.cloud/2025/05/29/15_AUDUNDELLINGKEIM135d89f8ee4b7b3e.png",
-      "https://s1.radikal.cloud/2025/05/29/22_IKIMIRASAERS840e35368eb9b454.png",
-      "https://s1.radikal.cloud/2025/05/29/29_AnneErekson0c65743f78281ce3.png",
+      "img/01_ЭнниМур.png", caption: "Декан факультета Энни Мур, выпускник(весна 2024)" ,
+      "img/07_ГрэйсГрейлэнд.png", caption: "Староста факультета ГрэйсГрейлэнд, 4 курс" ,
+      "img/08_EvylinMcFie.png", caption: "Староста факультета Evylin McFie, 5 курс" ,
+      "img/30_ТолстыйМонах.png", caption: "Толстый Монах, призрак факультета" ,
+      "img/19_ХирсинВандерер.png", caption: "Хирсин Вандерер, 2 курс" ,
+      "img/02_ДжаредКрин.png", caption: "Профессор Джаред Крин, выпускник(весна 2011)" ,
+      "img/09_WilliamJefferson.png", caption: "William Jefferson, 5 курс" ,
+      "img/31_ГражданинПифагорян.png", caption: "Гражданин Пифагорян, призрак факультета" ,
+      "img/10_АннаАнил.png", caption: "Анна Анил, 6 курс" ,
+      "img/29_AnneErekson.png", caption: "Anne Erekson, 1 курс" ,
+      "img/20_LeonardMcFee.png", caption: "Leonard McFee, 2 курс" ,
+      "img/03_АлисаИндиго.png", caption: "Профессор Алиса Индиго, выпускник(зима 2024-2025)" ,
+      "img/11_ТуральфЭустад.png", caption: "Туральф Эустадг, 5 курс" ,
+      "img/12_ЭмильРозье.png", caption: "Эмиль Розье, 4 курс" ,
+      "img/27_КромбергКиль.png", caption: "Кромберг Киль, 1 курс" ,
+      "img/32_ПуффендуйскиеПлюшка.png", caption: "Пуффендуйские плюшки, традиционное лакомство" ,
+      "img/21_МарселинВудхарт.png", caption: "Марселин Вудхарт, 2 курс" ,
+      "img/33_ГномыХаффлеПаффле.png", caption: "Гномы Хаффле и Паффле" ,
+      "img/04_СерафинаЛейн.png", caption: "Профессор Серафина Лейн" ,
+      "img/13_ХьюСмелс.png", caption: "Хью Смелс, 4 курс" ,
+      "img/14_NanielEsper.png", caption: "Naniel Esper, 4 курс" ,
+      "img/22_ИкимираСаерс.png", caption: "Икимира Саерс, 1 курс" ,
+      "img/05_ЛиваУнсет.png", caption: "Профессор Лива Унсет, выпускник(Зима 2022-2023)" ,
+      "img/15_АудунДеллингхейм.png", caption: "Аудун Деллингхейм, 4 курс" ,
+      "img/16_КеллиПейтон.png", caption: "Келли Пейтон, 3 курс" ,
+      "img/34_БарсукХаффи.png", caption: "Барсук Хаффи" ,
+      "img/23_ValleByun.png", caption: "Valle Byun, 1 курс" ,
+      "img/06_АльборекМортимер.png", caption: "Профессор Альборек Мортимер, выпускник(весна 2022)" ,
+      "img/17_МирандаКэмбелл.png", caption: "Миранда Кэмбелл, 3 курс" ,
+      "img/18_ТомасРоуз.png", caption: "Томас Роуз, 2 курс" ,
+      "img/24_ЭвелинОдри.png", caption: "Эвелин Одри, 1 курс" ,
+      "img/35_КактусоваяДевочка.png", caption: "Кактусовая Девочка" ,
+      "img/25_МагдаленаЭдинбург.png", caption: "Магдалена Эдинбург, 1 курс" ,
+      "img/36_ЧашаПенелопы.png", caption: "Чаша Пенелопы Пуффендуй, реликвия основательницы факультета" ,
+      "img/26_ДаниэльХарт.png", caption: "Даниэль Харт, 1 курс" ,
+      "img/28_ЧарлиГрэй.png", caption: "Чарли Грэй, 1 курс" ,
+      "img/37_СборнаяКарамель.png", caption: "Сборная команда по квиддичу Карамель" ,
     ];
 
     // Константы для особых категорий
