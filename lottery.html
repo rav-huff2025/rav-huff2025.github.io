@@ -135,11 +135,12 @@
     
     #message {
       font-size: 1.5rem;
-      margin-top: 1rem;
+      margin-top: 2rem 0;
       min-height: 2em;
       font-weight: 600;
       text-align: center;
       width: 100%;
+      padding: 0.5rem 0; 
     }
     
     nav a {
@@ -223,48 +224,75 @@
 
 .stamps-collage {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 30px auto;
-  max-width: 800px;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  max-width: 900px;
+  margin: 30px auto;
 }
 
-.stamps-collage img {
-  width: 180px;
-  height: 252px; /* Сохраняем пропорции 5:7 */
-  object-fit: cover;
+.stamp-item {
+  position: relative;
+  transition: all 0.5s ease;
+  transform: 
+    rotate(var(--rotation)) 
+    translateY(var(--offset-y));
+  flex: 0 0 auto;
+}
+
+.stamp-item img {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  aspect-ratio: 5/7;
   border-radius: 8px;
-  transition: all 0.4s ease;
+  object-fit: cover;
+  box-shadow: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.stamps-collage img:hover {
-  transform: translateY(-10px) scale(1.05);
+.stamp-item:hover {
   z-index: 10;
 }
 
+.stamp-item:hover img {
+  transform: scale(1.05);
+  box-shadow: none;
+}
+
 @media (max-width: 768px) {
-  .stamps-collage {
-    gap: 15px;
-  }
-  
-  .stamps-collage img {
-    width: 150px;
-    height: 210px;
+  .stamp-item img {
+    max-width: 130px;
   }
 }
 
 @media (max-width: 480px) {
-  .stamps-collage {
-    gap: 10px;
-  }
-  
-  .stamps-collage img {
-    width: 130px;
-    height: 182px;
+  .stamp-item img {
+    max-width: 100px;
   }
 }
 
+.game-counter {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 1.2rem;
+  color: #4D3B2F;
+  text-align: center;
+  margin: 15px 0;
+  padding: 8px;
+  background-color: rgba(210, 180, 140, 0.2);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+#gameCount {
+  font-weight: 700;
+  color: #8A5A44;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
     footer {
       text-align: center;
@@ -287,6 +315,7 @@
       
       #message {
         font-size: 1.3rem;
+        margin: 1.8rem 0;
       }
     }
 
@@ -314,6 +343,8 @@
       
       #message {
         font-size: 1.1rem;
+        margin: 1.5rem 0;
+        padding: 0.4rem 0;
       }
     }
   </style>
@@ -321,20 +352,25 @@
 <body>
   <header>
     <h1>Pufftery Game</h1>
-    <p>Почтовая, почти безвыиграшная лотерея. Рискни! Поймай удачу за хвост!</p>
+    <p>Почтовая, почти беспроигрышная лотерея. Рискни! Поймай удачу за хвост!</p>
   </header>
 
   <main>
     <nav>
       <a href="index.html">Главная</a>
       <a href="stamps.html">Коллекция марок</a>
+      <a href="award.html">Победители P.G.</a>
     </nav>
+    
+    <div class="game-counter">
+        Вы испытали удачу <span id="gameCount">0</span> раз
+    </div>
 
     <div class="cards-row" id="cardsRow"></div>
     <button id="resetBtn">Начать заново</button>
     <div id="message"></div>
-	
-	<div class="rules">
+    
+    <div class="rules">
   <h3>Правила лотереи Pufftery Game:</h3>
   <ol>
     <li>Участвовать могут абсолютно все. Количество попыток ограничено лишь вашей степенью терпения</li>
@@ -362,21 +398,30 @@
   <br><br>
     <li>Сделайте скриншот, на котором будет четко виден ваш результат</li>
     <li>Скорее опубликуйте его в теме с подарком или просто пришлите Блейк Эллингтон любым удобным вам способом
-	<li>Ждите заслуженную награду, ведь вы не только азартны, но и прекрасны
-	  <br><br>
-	 P.S. Несмотря на все приложенные усилия, есть вероятность, что коварные беклы(да, именно они) все-таки помешают вам получить приз. 
-	 Поэтому, если вам кажется, что ваш лотерейный билет был выигрышным, однако вы не увидели сообщения с поздравление, смело пишите нам!
-Мы не вернем вам деньги, ведь лотерея бесплатная, но поможем получить заслуженный приз.	
+    <li>Ждите заслуженную награду, ведь вы не только азартны, но и прекрасны
+      <br><br>
+     P.S. Несмотря на все приложенные усилия, есть вероятность, что коварные беклы(да, именно они) все-таки помешают вам получить приз. 
+     Поэтому, если вам кажется, что ваш лотерейный билет был выигрышным, однако вы не увидели сообщения с поздравление, смело пишите нам!
+Мы не вернем вам деньги, ведь лотерея бесплатная, но поможем получить заслуженный приз.  
   </ol> 
    
-  <div class="stamps-collage">
-    <img src="https://s1.radikal.cloud/2025/05/30/38_lottery4bce68ac0c298ef5.png" alt="Знаток истории" style="margin-top: -10px;">
-    <img src="https://s1.radikal.cloud/2025/05/30/39_lotterydadf97fa805676fe.png" alt="Сладкая булочка" style="margin-top: 15px;">
-    <img src="https://s1.radikal.cloud/2025/05/30/40_lottery8cf969446360a199.png" alt="Ценитель традиций" style="margin-top: -5px;">
-    <img src="https://s1.radikal.cloud/2025/05/30/40_lottery8cf969446360a199.png" alt="Что-то про удачу" style="margin-top: 10px;">
+<div class="stamps-collage">
+  <div class="stamp-item" style="--rotation: -3deg; --offset-y: -15px;">
+    <img src="https://s1.radikal.cloud/2025/05/30/38_lottery4bce68ac0c298ef5.png" alt="Знаток истории">
+  </div>
+  <div class="stamp-item" style="--rotation: 2deg; --offset-y: 10px;">
+    <img src="https://s1.radikal.cloud/2025/05/30/39_lotterydadf97fa805676fe.png" alt="Сладкая булочка">
+  </div>
+  <div class="stamp-item" style="--rotation: -1deg; --offset-y: -20px;">
+    <img src="https://s1.radikal.cloud/2025/05/30/TRADITII7f96da4201f34b84.png" alt="Ценитель традиций">
+  </div>
+  <div class="stamp-item" style="--rotation: 3deg; --offset-y: 5px;">
+    <img src="https://s1.radikal.cloud/2025/05/30/AddText_05-30-03.35.181133f200e78b6ca8.png" alt="Жидкая удача">
   </div>
 </div>
-	
+  
+</div>
+    
   </main>
 
   <script>
@@ -423,7 +468,7 @@
 
     // Константы для особых категорий
     const выпускники = [
-	  "https://s1.radikal.cloud/2025/05/29/01_ENNIMURfe4d0f1a6fda83dd.png",
+      "https://s1.radikal.cloud/2025/05/29/01_ENNIMURfe4d0f1a6fda83dd.png",
       "https://s1.radikal.cloud/2025/05/29/02_DZAREDKRINf4ecab63356ede07.png",
       "https://s1.radikal.cloud/2025/05/29/03_ALISAINDIGOd7e134e68279602e.png",
       "https://s1.radikal.cloud/2025/05/29/04_SERAFINALEINc8b3f6e4bf3956a8.png",
@@ -558,6 +603,23 @@ function checkForDuplicates() {
 
     // Запускаем игру при загрузке
     initGame();
+    
+    // Инициализация счётчика
+    let gameCount = localStorage.getItem('puffteryGameCount') || 0;
+    document.getElementById('gameCount').textContent = gameCount;
+
+    // Обновление счётчика при клике на "Начать заново"
+    resetBtn.addEventListener('click', () => {
+      gameCount++;
+      localStorage.setItem('puffteryGameCount', gameCount);
+      document.getElementById('gameCount').textContent = gameCount;
+      initGame();
+    });
+
+    // В функции initGame() уберите вызов из последней строки
+    // и вызывайте его только при загрузке страницы:
+    window.addEventListener('DOMContentLoaded', initGame);
+    
   </script>
 
   <footer>
